@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar/collapsible_multi_level_item_widget.dart';
 import 'package:flutter/material.dart';
@@ -59,45 +60,57 @@ class _CollapsibleItemWidgetState extends State<CollapsibleItemWidget> {
       },
       cursor: widget.onHoverPointer,
       child: LayoutBuilder(builder: (context, boxConstraints) {
+        final double itemWidth = boxConstraints.maxWidth - 2 * widget.padding;
+        final double minRequiredWidth =
+            (widget.iconSize ?? 40) + (widget.subItems != null ? 24 : 0);
+        final double targetWidth = math.max(itemWidth, minRequiredWidth);
+
         return Container(
           color: Colors.transparent,
           padding: EdgeInsets.all(widget.padding),
-          child: widget.subItems == null
-              ? GestureDetector(
-                  onTap: widget.onTap,
-                  onLongPress: widget.onLongPress,
-                  child: Row(
-                    children: [
-                      widget.leading,
-                      _title,
-                    ],
-                  ),
-                )
-              : CollapsibleMultiLevelItemWidget(
-                  onHoverPointer: widget.onHoverPointer,
-                  textStyle: widget.textStyle,
-                  offsetX: widget.offsetX,
-                  isSelected: widget.isSelected,
-                  scale: widget.scale,
-                  padding: widget.padding,
-                  minWidth: widget.minWidth,
-                  isCollapsed: widget.isCollapsed,
-                  parentComponent: widget.parentComponent,
-                  onHold: widget.onLongPress,
-                  mainLevel: Row(
-                    children: [
-                      Flexible(child: widget.leading),
-                      _title,
-                    ],
-                  ),
-                  onTapMainLevel: widget.onTap,
-                  subItems: widget.subItems!,
-                  extendable:
-                      widget.isCollapsed != false || widget.isSelected != false,
-                  disable: widget.isCollapsed,
-                  iconColor: widget.iconColor,
-                  iconSize: widget.iconSize,
-                ),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const NeverScrollableScrollPhysics(),
+            child: SizedBox(
+              width: targetWidth < 0 ? 0 : targetWidth,
+              child: widget.subItems == null
+                  ? GestureDetector(
+                      onTap: widget.onTap,
+                      onLongPress: widget.onLongPress,
+                      child: Row(
+                        children: [
+                          widget.leading,
+                          _title,
+                        ],
+                      ),
+                    )
+                  : CollapsibleMultiLevelItemWidget(
+                      onHoverPointer: widget.onHoverPointer,
+                      textStyle: widget.textStyle,
+                      offsetX: widget.offsetX,
+                      isSelected: widget.isSelected,
+                      scale: widget.scale,
+                      padding: widget.padding,
+                      minWidth: widget.minWidth,
+                      isCollapsed: widget.isCollapsed,
+                      parentComponent: widget.parentComponent,
+                      onHold: widget.onLongPress,
+                      mainLevel: Row(
+                        children: [
+                          widget.leading,
+                          _title,
+                        ],
+                      ),
+                      onTapMainLevel: widget.onTap,
+                      subItems: widget.subItems!,
+                      extendable:
+                          widget.isCollapsed != false || widget.isSelected != false,
+                      disable: widget.isCollapsed,
+                      iconColor: widget.iconColor,
+                      iconSize: widget.iconSize,
+                    ),
+            ),
+          ),
         );
       }),
     );

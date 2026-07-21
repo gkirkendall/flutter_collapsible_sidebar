@@ -32,6 +32,7 @@ class CollapsibleSidebar extends StatefulWidget {
     this.iconSize = 40,
     this.customContentPaddingLeft = -1,
     this.toggleButtonIcon = Icons.chevron_right,
+    this.toggleButtonIconColor,
     this.backgroundColor = const Color(0xff2B3138),
     this.avatarBackgroundColor = const Color(0xff6A7886),
     this.selectedIconBox = const Color(0xff2F4047),
@@ -90,6 +91,7 @@ class CollapsibleSidebar extends StatefulWidget {
       screenPadding,
       customContentPaddingLeft;
   final IconData toggleButtonIcon;
+  final Color? toggleButtonIconColor;
   final Color backgroundColor,
       avatarBackgroundColor,
       selectedIconBox,
@@ -458,7 +460,7 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
         child: Icon(
           widget.toggleButtonIcon,
           size: widget.iconSize,
-          color: widget.unselectedIconColor,
+          color: widget.toggleButtonIconColor ?? widget.unselectedIconColor,
         ),
       ),
       title: widget.toggleTitle,

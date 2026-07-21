@@ -1,6 +1,6 @@
-import 'dart:math' as math show pi;
-
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
+import 'package:collapsible_sidebar/color_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -12,16 +12,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Sidebar ui',
-      home: Scaffold(
-        body: SidebarPage(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: const Text('Yay! Button Pressed!')));
-          },
-          backgroundColor: Colors.green,
-          child: const Icon(Icons.navigation),
-        ),
+      theme: AppTheme.light.copyWith(
+        iconTheme: const IconThemeData(weight: 200),
+      ),
+      darkTheme: AppTheme.dark.copyWith(
+        iconTheme: const IconThemeData(weight: 200),
+      ),
+      themeMode: ThemeMode.system,
+      home: Builder(
+        builder: (context) {
+          return Scaffold(
+            body: const SidebarPage(),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Yay! Button Pressed!')));
+              },
+              child: const Icon(CupertinoIcons.location),
+            ),
+          );
+        },
       ),
     );
   }
@@ -49,7 +59,7 @@ class _SidebarPageState extends State<SidebarPage> {
     return [
       CollapsibleItem(
           text: 'Dashboard',
-          icon: Icons.assessment,
+          icon: CupertinoIcons.chart_bar,
           onPressed: () => setState(() => _headline = 'DashBoard'),
           onHold: () => ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: const Text("Dashboard"))),
@@ -57,7 +67,7 @@ class _SidebarPageState extends State<SidebarPage> {
           subItems: [
             CollapsibleItem(
               text: 'Menu',
-              icon: Icons.menu_book,
+              icon: CupertinoIcons.book,
               onPressed: () => setState(() => _headline = 'Menu'),
               onHold: () => ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: const Text("Menu"))),
@@ -66,7 +76,7 @@ class _SidebarPageState extends State<SidebarPage> {
             CollapsibleItem(
                 text: 'Shop',
                 iconImage: AssetImage("assets/shop_icon.png"),
-                icon: Icons.ac_unit,
+                icon: CupertinoIcons.snow,
                 onPressed: () => setState(() => _headline = 'Shop'),
                 onHold: () => ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: const Text("Shop"))),
@@ -74,7 +84,7 @@ class _SidebarPageState extends State<SidebarPage> {
                 subItems: [
                   CollapsibleItem(
                     text: 'Cart',
-                    icon: Icons.shopping_cart,
+                    icon: CupertinoIcons.cart,
                     onPressed: () => setState(() => _headline = 'Cart'),
                     onHold: () => ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: const Text("Cart"))),
@@ -84,42 +94,42 @@ class _SidebarPageState extends State<SidebarPage> {
           ]),
       CollapsibleItem(
         text: 'Search',
-        icon: Icons.search,
+        icon: CupertinoIcons.search,
         onPressed: () => setState(() => _headline = 'Search'),
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: const Text("Search"))),
       ),
       CollapsibleItem(
         text: 'Notifications',
-        icon: Icons.notifications,
+        icon: CupertinoIcons.bell,
         onPressed: () => setState(() => _headline = 'Notifications'),
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: const Text("Notifications"))),
       ),
       CollapsibleItem(
         text: 'Settings',
-        icon: Icons.settings,
+        icon: CupertinoIcons.settings,
         onPressed: () => setState(() => _headline = 'Settings'),
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: const Text("Settings"))),
       ),
       CollapsibleItem(
         text: 'Alarm',
-        icon: Icons.access_alarm,
+        icon: CupertinoIcons.alarm,
         onPressed: () => setState(() => _headline = 'Alarm'),
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: const Text("Alarm"))),
       ),
       CollapsibleItem(
         text: 'Eco',
-        icon: Icons.eco,
+        icon: CupertinoIcons.leaf_arrow_circlepath,
         onPressed: () => setState(() => _headline = 'Eco'),
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: const Text("Eco"))),
       ),
       CollapsibleItem(
         text: 'Event',
-        icon: Icons.event,
+        icon: CupertinoIcons.calendar,
         onPressed: () => setState(() => _headline = 'Event'),
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: const Text("Event"))),
@@ -132,50 +142,49 @@ class _SidebarPageState extends State<SidebarPage> {
       ),
       CollapsibleItem(
         text: 'Email',
-        icon: Icons.email,
+        icon: CupertinoIcons.mail,
         onPressed: () => setState(() => _headline = 'Email'),
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: const Text("Email"))),
       ),
       CollapsibleItem(
           text: 'News',
-          iconImage: NetworkImage(
-              "https://cdn-icons-png.flaticon.com/512/330/330703.png"),
+          iconImage: AssetImage("assets/news_icon.png"),
           onPressed: () => setState(() => _headline = 'News'),
           onHold: () => ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: const Text("News"))),
           subItems: [
             CollapsibleItem(
               text: 'Old News',
-              icon: Icons.elderly,
+              icon: CupertinoIcons.time,
               onPressed: () => setState(() => _headline = 'Old News'),
               onHold: () => ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: const Text("Old News"))),
             ),
             CollapsibleItem(
                 text: 'Current News',
-                icon: Icons.yard_outlined,
+                icon: CupertinoIcons.rosette,
                 onPressed: () => setState(() => _headline = 'Current News'),
                 onHold: () => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: const Text("Current News"))),
                 subItems: [
                   CollapsibleItem(
                     text: 'News 1',
-                    icon: Icons.one_k,
+                    icon: CupertinoIcons.circle,
                     onPressed: () => setState(() => _headline = 'News 1'),
                     onHold: () => ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: const Text("News 1"))),
                   ),
                   CollapsibleItem(
                       text: 'News 2',
-                      icon: Icons.two_k,
+                      icon: CupertinoIcons.circle,
                       onPressed: () => setState(() => _headline = 'News 2'),
                       onHold: () => ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: const Text("News 2"))),
                       subItems: [
                         CollapsibleItem(
                           text: 'News 2 Detail',
-                          icon: Icons.two_k_outlined,
+                          icon: CupertinoIcons.circle,
                           onPressed: () =>
                               setState(() => _headline = 'News 2 Detail'),
                           onHold: () => ScaffoldMessenger.of(context)
@@ -185,7 +194,7 @@ class _SidebarPageState extends State<SidebarPage> {
                       ]),
                   CollapsibleItem(
                     text: 'News 3',
-                    icon: Icons.three_k,
+                    icon: CupertinoIcons.circle,
                     onPressed: () => setState(() => _headline = 'News 3'),
                     onHold: () => ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: const Text("News 3"))),
@@ -193,7 +202,7 @@ class _SidebarPageState extends State<SidebarPage> {
                 ]),
             CollapsibleItem(
               text: 'New News',
-              icon: Icons.account_balance,
+              icon: CupertinoIcons.building_2_fill,
               onPressed: () => setState(() => _headline = 'New News'),
               onHold: () => ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: const Text("New News"))),
@@ -201,7 +210,7 @@ class _SidebarPageState extends State<SidebarPage> {
           ]),
       CollapsibleItem(
         text: 'Face',
-        icon: Icons.face,
+        icon: CupertinoIcons.smiley,
         onPressed: () => setState(() => _headline = 'Face'),
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: const Text("Face"))),
@@ -224,24 +233,28 @@ class _SidebarPageState extends State<SidebarPage> {
               SnackBar(content: Text('Yay! Flutter Collapsible Sidebar!')));
         },
         body: _body(size, context),
-        backgroundColor: Colors.black,
-        selectedTextColor: Colors.limeAccent,
-        textStyle: TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
-        titleStyle: TextStyle(
-            fontSize: 20,
-            fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.bold),
-        toggleTitleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+        selectedTextColor: Theme.of(context).colorScheme.primary,
+        selectedIconColor: Theme.of(context).colorScheme.onPrimaryContainer,
+        selectedIconBox: Theme.of(context).colorScheme.primaryContainer,
+        toggleButtonIconColor: Theme.of(context).colorScheme.primary,
+        unselectedTextColor: Theme.of(context).colorScheme.onSurfaceVariant,
+        unselectedIconColor: Theme.of(context).colorScheme.onSurfaceVariant,
+        textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontSize: 15,
+            ),
+        titleStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+        toggleTitleStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
         sidebarBoxShadow: [
           BoxShadow(
-            color: Colors.indigo,
-            blurRadius: 20,
-            spreadRadius: 0.01,
-            offset: Offset(3, 3),
-          ),
-          BoxShadow(
-            color: Colors.green,
-            blurRadius: 50,
+            color: Theme.of(context).shadowColor.withValues(alpha: 0.2),
+            blurRadius: 10,
             spreadRadius: 0.01,
             offset: Offset(3, 3),
           ),
@@ -254,18 +267,32 @@ class _SidebarPageState extends State<SidebarPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Colors.blueGrey[50],
-      child: Center(
-        child: Transform.rotate(
-          angle: math.pi / 2,
-          child: Transform.translate(
-            offset: Offset(-size.height * 0.3, -size.width * 0.23),
-            child: Text(
-              _headline,
-              style: Theme.of(context).textTheme.displayLarge,
-              overflow: TextOverflow.visible,
-              softWrap: false,
-            ),
+      color: Theme.of(context).colorScheme.surface,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 64),
+              Text(
+                _headline,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Select an option from the sidebar',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+              ),
+            ],
           ),
         ),
       ),
