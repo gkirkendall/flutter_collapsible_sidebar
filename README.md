@@ -4,10 +4,10 @@
 
 A collapsible sidebar for Flutter apps implementing the Material Design.
 
-![responsive-ui](https://user-images.githubusercontent.com/37551474/182013560-741723a2-64c3-40e2-9b6c-c640e7fcf1ba.gif)
+## 🌟 Version flutter 3 Upgrade ✨
 
-## 🌟 Version 2.0.7 ✨
-
+This version of collapsible sidebar has been upgraded to work with Flutter 3 and modern Java/Gradle for Android
+and the flex color scheme - https://github.com/rydmike/flex_color_scheme
 ---
 
 ## Features
@@ -24,14 +24,12 @@ A collapsible sidebar for Flutter apps implementing the Material Design.
 - Flutter Android
 - Flutter iOS
 - Flutter web
-- Flutter desktop
+- Flutter desktop mac
+- flutter desktop windows
 
 ## Contributors
 ### A big thank you to all the contributors without whom this project would be impossible to maintain and enhance. 👏👏👏
 
-<a href="https://github.com/DrunkOnBytes/flutter_collapsible_sidebar/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=DrunkOnBytes/flutter_collapsible_sidebar&max=100&anon=1" />
-</a>
 
 ## Live preview
 
