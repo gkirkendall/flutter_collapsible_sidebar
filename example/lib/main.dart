@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,14 +28,15 @@ class MyApp extends StatelessWidget {
 }
 
 class SidebarPage extends StatefulWidget {
+  const SidebarPage({super.key});
   @override
-  _SidebarPageState createState() => _SidebarPageState();
+  State<SidebarPage> createState() => _SidebarPageState();
 }
 
 class _SidebarPageState extends State<SidebarPage> {
   late List<CollapsibleItem> _items;
   late String _headline;
-  AssetImage _avatarImg = AssetImage('assets/man.png');
+  final AssetImage _avatarImg = AssetImage('assets/man.png');
 
   @override
   void initState() {
