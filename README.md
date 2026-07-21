@@ -2,192 +2,231 @@
 
 ---
 
-A collapsible sidebar for Flutter apps implementing the Material Design.
+A collapsible sidebar for Flutter apps implementing Material Design, upgraded for **Flutter 3.x** and **Material 3** with built-in **FlexColorScheme** integration.
+
+---
 
 ## 🌟 Version 3.0.0 - Flutter 3 Upgrade ✨
 
-This version of collapsible sidebar has been upgraded to work with Flutter 3 and modern Java/Gradle for Android
-and the flex color scheme - https://github.com/rydmike/flex_color_scheme
+This is an updated fork of `collapsible_sidebar` modernized for Flutter 3.x, Android v2 embedding, modern Java/Gradle tools, and seamless dark/light theme support powered by [`flex_color_scheme`](https://pub.dev/packages/flex_color_scheme).
+
+### 🚀 Key Fork Improvements in v3.0.0
+- **Flutter 3.x Compatibility**: Modernized Dart SDK constraints (`>=3.0.0 <4.0.0`) and updated core APIs.
+- **Android V2 Embedding & Gradle Upgrade**: Fully compatible with recent AGP and Java versions for Android builds.
+- **Material 3 & Theme Support**: Built-in `AppTheme` helpers (`lib/color_theme.dart`) with `FlexColorScheme` integration.
+- **Multi-Platform Support**: Tested across Web, Android, iOS, macOS, Linux and Windows desktop.
+- **Overflow Fixes**: Resolved `RenderFlex` overflow issues in collapsed/expanded transitions and item text rendering.
+
 ---
 
 ## Features
 
-- Material Design
-- Pre-built customizable tile widgets (CollapsibleItems)
-- Smooth Animation
-- Supports both LTR & RTL languages
-- Supports MULTI-LEVEL Menu
-- Alert Badges on CollapsibleItems
+- Material Design styling
+- Pre-built customizable tile widgets (`CollapsibleItem`s)
+- Smooth collapse/expand animations
+- Supports LTR & RTL languages
+- Multi-level nested menus
+- Alert badges with custom counts on items
+- Integrated `FlexColorScheme` light & dark themes
 
-## Supported platforms
+## Supported Platforms
 
-- Flutter Android
-- Flutter iOS
-- Flutter web
-- Flutter desktop mac
-- flutter desktop windows
-
-## Contributors
-### A big thank you to all the contributors without whom this project would be impossible to maintain and enhance. 👏👏👏
-
-
-## Live preview
-
-https://drunkonbytes.github.io/flutter_collapsible_sidebar
-
-Note: this page is built with flutter-web. For a better user experience, please use a mobile device to open this link.
-
-## Installation
-
-Add `collapsible_sidebar: ^3.0.0` to your `pubspec.yaml` dependencies. And import it:
-
-```dart
-import 'package:collapsible_sidebar/collapsible_sidebar.dart';
-```
-
-## How to use
-
-1. Create a list of `CollapsibleItems` named `_items` (or whatever fancy name you like)
-
-### For a collapsible item with sub-items to be the default selected item MARK ALL OF ITS SUB-ITEMS WITH THE `isSelected: true` property.
-
-```dart
-List<CollapsibleItem> get _items {
-    return [
-      CollapsibleItem(
-          text: 'Shop',
-          iconImage: AssetImage("assets/shop_icon.png"), //`iconImage` has priority over `icon` property
-          icon: Icons.ac_unit,
-          onPressed: () => setState(() => _headline = 'Shop'),
-          onHold: () => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: const Text("Shop"))
-          ),
-          isSelected: true,
-          subItems: [
-            CollapsibleItem(
-              text: 'Cart',
-              icon: Icons.shopping_cart,
-              onPressed: () => setState(() => _headline = 'Cart'),
-              onHold: () => ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: const Text("Cart"))
-              ),
-              isSelected: true,
-            )
-          ]
-      ),
-      CollapsibleItem(
-        text: 'Dashboard',
-        badgeCount: 7,
-        icon: Icons.assessment,
-        onPressed: () => setState(() => _headline = 'DashBoard'),
-        onHold: () => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: const Text("DashBoard"))
-        ),
-      ),
-      CollapsibleItem(
-        text: 'Ice-Cream',
-        icon: Icons.icecream,
-        onPressed: () => setState(() => _headline = 'Ice-Cream'),
-        onHold: () => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: const Text("Ice-Cream"))
-        ),
-      ),
-      CollapsibleItem(
-        text: 'Search',
-        icon: Icons.search,
-        onPressed: () => setState(() => _headline = 'Search'),
-        onHold: () => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: const Text("Search"))
-        ),
-      ),
-    ];
-  }
-```
-2. Define the body of the app (the widget where the main working of the app will be) and name it say `_body`.
-
-```dart
-Widget _body(Size size, BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.blueGrey[50],
-      child: .........,
-    );
-  }
- ```
-
-3. Finally completely define the `CollapsibleSidebar` widget by adding the list of `CollapsibleItems` named `_items`, the body of the app named `_body` and the customizable parameters as needed:
-
-```dart
-CollapsibleSidebar(
-  items: _items,
-  avatarImg: _avatarImg,
-  title: 'John Smith',
-  body: _body(size, context),
-)
-```
-
-Also you can use the `isCollapsed` condition depending how you want the state of the sidebar to change (collapsed/expanded)
-for example [size.width]
-
-```dart
-CollapsibleSidebar(
-  isCollapsed: MediaQuery.of(context).size.width <= 800,
-  items: _items,
-  avatarImg: _avatarImg,
-  title: 'John Smith',
-  body: _body(size, context),
-)
-```
-
-## Parameters (customizable attributes)
-
-| Name | Data Type | Default Value | Description |
-| :---: | :---: | :---: | :---: |
-| `isCollapsed` | bool | true | can set condition to control state of sidebar (collapsed/expanded) on some property change |
-| `collapseOnBodyTap` | bool | true | flag to enable/disable tapping on the body of the app (area other than the sidebar) to collapse the sidebar |
-| `items` | `List<CollapsibleItems>` | --- | List of `CollapsibleItems` |
-| `showTitle` | bool | true | can set to false to hide title and avatar Image |
-| `title` | String | --- | Title of the Collapsible Sidebar |
-| `titleBack` | bool | false | set to 'true' to use a back icon instead of avatar picture |
-| `titleBackIcon` | Icons | Icons.arrow_back | the back icon is 'arrow_back' by default (customizable) |
-| `onTitleTap` | Function | --- | custom callback function called when title avatar or back icon is pressed |
-| `onHoverPointer` | SystemMouseCursors | SystemMouseCursors.click | the default hover mouse pointer is set to 'click' type by default (customizable) |
-| `textStyle` | TextStyle | --- | custom style for sidebar title |
-| `titleStyle` | TextStyle | --- | custom style for collapsible items text |
-| `toggleTitleStyle` | TextStyle | --- | custom style for toggle button title |
-| `avatarImg` | Image | --- | Image to be displayed |
-| `body` | Widget | --- | The main body of the app (the underlying main widget other than the sidebar) |
-| `height` | double | double.infinity | height of the Sidebar |
-| `minWidth` | double | 80 | Width of Sidebar when Collapsed |
-| `maxWidth` | double | 270 |  Width of Sidebar when Expanded |
-| `borderRadius` | double |15 | Radius of the borders |
-| `iconSize` | double | 40 | Size of the icons |
-| `customContentPaddingLeft` | double | -1 | Padding to the left of CollapsibleItems (keep value less than 0 for default padding) |
-| `toggleTitle` | String | 'Collapse' | title text of Toggle Button |
-| `toggleButtonIcon` | Icons | Icons.chevron_right | Icon of the Toggle button |
-| `backgroundColor` | Color | Color(0xff2B3138) | The background color |
-| `avatarBackgroundColor` | Color | Color(0xff6A7886) | The avatar background color |
-| `selectedIconBox` | Color | Color(0xff2F4047) | Color of Icon Box when selected |
-| `selectedIconColor` | Color | Color(0xff4AC6EA) | Color of Icon when selected |
-| `selectedTextColor` | Color | Color(0xffF3F7F7) | Color of text when selected |
-| `unselectedIconColor` | Color | Color(0xff6A7886) | Color of Icon when not selected |
-| `unselectedTextColor` | Color | Color(0xffC0C7D0) | Color of text when not selected |
-| `badgeBackgroundColor` | Color | Color(0xffFF6767) | Background color of badges on Collapsible Items |
-| `badgeTextColor` | Color | Color(0xffF3F7F7) | Badge Text color of badges on Collapsible Items |
-| `duration` | Duration | Duration(milliseconds: 500) | Animation duration for collapsed->expanded & vice-versa |
-| `curve` | Curves | Curves.fastLinearToSlowEaseIn | Animation curve for collapsed->expanded & vice-versa |
-| `screenPadding` | double | 4 | Padding to the screen |
-| `topPadding` | double | 0 | space between image avatar and icons |
-| `bottomPadding` | double | 0 | space between icons and toggle button |
-| `itemPadding` | double | 10 | space between collapsible items |
-| `customItemOffsetX ` | double | -1 | X axis offset for collapsible items (keep value less than 0 for default offset) |
-| `fitItemsToBottom` | bool | true | fit all icons to the end of the space between image avatar and toggle button|
-| `showToggleButton` | bool | true | flag to enable/disable showing the toggle button |
-| `sidebarBoxShadow` | `List<BoxShadow>` | [BoxShadow(color: Colors.blue, blurRadius: 10, spreadRadius: 0.01, offset: Offset(3, 3),),] | Just like the "BoxDecoration" parameter of a "Container" |
-
-## License
+- 📱 Flutter Android
+- 📱 Flutter iOS
+- 🌐 Flutter Web
+- 🖥️ Flutter Desktop (macOS & Windows)
 
 ---
 
-Apache 2.0
+## Live Preview
+
+Check out the interactive web demo:
+👉 **[https://gkirkendall.github.io/flutter_collapsible_sidebar/](https://gkirkendall.github.io/flutter_collapsible_sidebar/)**
+
+> **Note**: Built with Flutter Web. For the best mobile preview experience, open on a mobile device or desktop browser.
+
+---
+
+## Installation
+
+Add `collapsible_sidebar` to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  collapsible_sidebar:
+    git:
+      url: https://github.com/gkirkendall/flutter_collapsible_sidebar.git
+      ref: flutter3_upgrade
+  flex_color_scheme: ^8.4.0
+```
+
+And import it in your Dart code:
+
+```dart
+import 'package:collapsible_sidebar/collapsible_sidebar.dart';
+import 'package:collapsible_sidebar/color_theme.dart'; // Optional: for built-in FlexColorScheme themes
+```
+
+---
+
+## How to Use
+
+### 1. Define Theme (Optional, powered by FlexColorScheme)
+
+Use `AppTheme.light` and `AppTheme.dark` in your `MaterialApp` for modern Material 3 styling:
+
+```dart
+MaterialApp(
+  theme: AppTheme.light,
+  darkTheme: AppTheme.dark,
+  themeMode: ThemeMode.system,
+  home: const SidebarPage(),
+);
+```
+
+### 2. Create your list of `CollapsibleItem`s
+
+You can nest `CollapsibleItem`s using `subItems` for multi-level navigation:
+
+```dart
+List<CollapsibleItem> get _items {
+  return [
+    CollapsibleItem(
+      text: 'Dashboard',
+      icon: CupertinoIcons.chart_bar,
+      onPressed: () => setState(() => _headline = 'Dashboard'),
+      isSelected: true,
+      subItems: [
+        CollapsibleItem(
+          text: 'Analytics',
+          icon: CupertinoIcons.graph_square,
+          onPressed: () => setState(() => _headline = 'Analytics'),
+          isSelected: true,
+        ),
+      ],
+    ),
+    CollapsibleItem(
+      text: 'Notifications',
+      badgeCount: 5,
+      icon: CupertinoIcons.bell,
+      onPressed: () => setState(() => _headline = 'Notifications'),
+    ),
+    CollapsibleItem(
+      text: 'Settings',
+      icon: CupertinoIcons.settings,
+      onPressed: () => setState(() => _headline = 'Settings'),
+    ),
+  ];
+}
+```
+
+### 3. Add `CollapsibleSidebar` to your layout
+
+Bind sidebar colors dynamically to your app's active `ThemeData`:
+
+```dart
+@override
+Widget build(BuildContext context) {
+  var size = MediaQuery.of(context).size;
+  return SafeArea(
+    child: CollapsibleSidebar(
+      isCollapsed: MediaQuery.of(context).size.width <= 800,
+      items: _items,
+      avatarImg: const AssetImage('assets/avatar.png'),
+      title: 'John Smith',
+      onTitleTap: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profile Clicked')),
+        );
+      },
+      body: _body(size, context),
+      // Theme integrations
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+      selectedTextColor: Theme.of(context).colorScheme.primary,
+      selectedIconColor: Theme.of(context).colorScheme.onPrimaryContainer,
+      selectedIconBox: Theme.of(context).colorScheme.primaryContainer,
+      toggleButtonIconColor: Theme.of(context).colorScheme.primary,
+      unselectedTextColor: Theme.of(context).colorScheme.onSurfaceVariant,
+      unselectedIconColor: Theme.of(context).colorScheme.onSurfaceVariant,
+    ),
+  );
+}
+
+Widget _body(Size size, BuildContext context) {
+  return Container(
+    height: double.infinity,
+    width: double.infinity,
+    color: Theme.of(context).colorScheme.surface,
+    child: Center(
+      child: Text(
+        _headline,
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+    ),
+  );
+}
+```
+
+---
+
+## Parameters (Customizable Attributes)
+
+| Parameter | Data Type | Default Value | Description |
+| :---: | :---: | :---: | :--- |
+| `isCollapsed` | `bool` | `true` | Set condition to control collapsed/expanded state (e.g. screen width) |
+| `collapseOnBodyTap` | `bool` | `true` | Tap outside sidebar to collapse |
+| `items` | `List<CollapsibleItem>` | **required** | List of items and nested sub-items |
+| `body` | `Widget` | **required** | Main content widget of the app |
+| `showTitle` | `bool` | `true` | Show or hide avatar image and title |
+| `title` | `String` | `'Lorem Ipsum'` | Title string next to avatar |
+| `titleBack` | `bool` | `false` | Display back icon instead of avatar image |
+| `titleBackIcon` | `IconData` | `Icons.arrow_back` | Custom back icon |
+| `onTitleTap` | `VoidCallback?` | `null` | Callback when title or avatar is tapped |
+| `onHoverPointer` | `MouseCursor` | `SystemMouseCursors.click` | Mouse cursor on hover |
+| `avatarImg` | `ImageProvider?` | `null` | Avatar image source |
+| `height` | `double` | `double.infinity` | Height of sidebar |
+| `minWidth` | `double` | `80` | Sidebar width when collapsed |
+| `maxWidth` | `double` | `270` | Sidebar width when expanded |
+| `borderRadius` | `double` | `15` | Corner radius of sidebar |
+| `iconSize` | `double` | `40` | Size of item icons |
+| `customContentPaddingLeft` | `double` | `-1` | Custom left padding for items (-1 for default) |
+| `toggleTitle` | `String` | `'Collapse'` | Toggle button label |
+| `toggleButtonIcon` | `IconData` | `Icons.chevron_right` | Toggle button icon |
+| `toggleButtonIconColor` | `Color?` | `null` | Color of toggle icon |
+| `backgroundColor` | `Color` | `Color(0xff2B3138)` | Sidebar background color |
+| `avatarBackgroundColor` | `Color` | `Color(0xff6A7886)` | Avatar background circle color |
+| `selectedIconBox` | `Color` | `Color(0xff2F4047)` | Background box color for selected item |
+| `selectedIconColor` | `Color` | `Color(0xff4AC6EA)` | Selected item icon color |
+| `selectedTextColor` | `Color` | `Color(0xffF3F7F7)` | Selected item text color |
+| `unselectedIconColor` | `Color` | `Color(0xff6A7886)` | Unselected item icon color |
+| `unselectedTextColor` | `Color` | `Color(0xffC0C7D0)` | Unselected item text color |
+| `badgeBackgroundColor` | `Color` | `Color(0xffFF6767)` | Badge background color |
+| `badgeTextColor` | `Color` | `Color(0xffF3F7F7)` | Badge text color |
+| `duration` | `Duration` | `500ms` | Animation speed for expand/collapse |
+| `curve` | `Curve` | `Curves.fastLinearToSlowEaseIn` | Animation curve |
+| `screenPadding` | `double` | `4` | Outer padding around sidebar |
+| `topPadding` | `double` | `0` | Vertical space above item list |
+| `bottomPadding` | `double` | `0` | Vertical space below item list |
+| `itemPadding` | `double` | `10` | Spacing between items |
+| `customItemOffsetX` | `double` | `-1` | X-axis offset for items (-1 for default) |
+| `fitItemsToBottom` | `bool` | `false` | Align items towards the bottom |
+| `showToggleButton` | `bool` | `true` | Show or hide the expand/collapse toggle button |
+| `sidebarBoxShadow` | `List<BoxShadow>` | `[BoxShadow(...)]` | Sidebar shadow decorations |
+
+---
+
+## Credits & Acknowledgments
+
+This package is a modernized fork of the original [`collapsible_sidebar`](https://github.com/DrunkOnBytes/flutter_collapsible_sidebar) created by **Arjun Sinha** ([@DrunkOnBytes](https://github.com/DrunkOnBytes)).
+
+Special thanks to all original contributors:
+
+<a href="https://github.com/DrunkOnBytes/flutter_collapsible_sidebar/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=DrunkOnBytes/flutter_collapsible_sidebar&max=100&anon=1" />
+</a>
+
+---
+
+## License
+
+Apache 2.0 - See [LICENSE](LICENSE) for details.
