@@ -34,7 +34,7 @@ This is an updated fork of `collapsible_sidebar` modernized for Flutter 3.x, And
 - 📱 Flutter Android
 - 📱 Flutter iOS
 - 🌐 Flutter Web
-- 🖥️ Flutter Desktop (macOS & Windows)
+- 🖥️ Flutter Desktop (macOS, Linux & Windows)
 
 ---
 
