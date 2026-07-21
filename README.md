@@ -39,7 +39,7 @@ Note: this page is built with flutter-web. For a better user experience, please 
 
 ## Installation
 
-Add `collapsible_sidebar: ^2.0.7` to your `pubspec.yaml` dependencies. And import it:
+Add `collapsible_sidebar: ^3.0.0` to your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
