@@ -1,0 +1,41 @@
+name: Deploy Example to GitHub Pages
+
+on:
+  push:
+    branches: [ flutter3_upgrade, master, main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      # Navigate into example directory for dependencies and build
+      - name: Build Example Web
+        run: |
+          cd example
+          flutter pub get
+          flutter build web --release --base-href "/${{ github.event.repository.name }}/"
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: example/build/web
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
