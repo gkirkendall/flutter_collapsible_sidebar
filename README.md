@@ -4,7 +4,7 @@
 
 A collapsible sidebar for Flutter apps implementing the Material Design.
 
-## 🌟 Version flutter 3 Upgrade ✨
+## 🌟 Version 3.0.0 - Flutter 3 Upgrade ✨
 
 This version of collapsible sidebar has been upgraded to work with Flutter 3 and modern Java/Gradle for Android
 and the flex color scheme - https://github.com/rydmike/flex_color_scheme
